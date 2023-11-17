@@ -193,15 +193,115 @@ class PatientController extends Controller
     //
     public function positive()
     {
+        // menggunakan model student untuk select data, define variabel pasien terlebih dulu
+        $patients = Patient::where('status', 'positive')->get();
+
+        // kemudian diawal lakukan pengecekan untuk handling jika data kosong
+        // karena kalau pengecekkan data kosong di akhir, yang terbaca duluan adalah message yang pertama
+        if ($patients->isEmpty()) {
+            $data = [
+                "message" => "Data is empty",
+                "data" => []
+            ];
+
+            return response()->json($data, 200);
+        }
+
+        // handling jika database tidak ada
+        else {
+            $data = [
+                "message" => "Data not found",
+                "data" => []
+            ];
+
+            return response()->json($data, 404);
+        }
+
+        // Menghitung total data pasien positif
+        $totalPositivePatients = $patients->count();
+
+        $data = [
+            'message' => 'Get all positive patients',
+            'total' => $totalPositivePatients,
+            'data' => $patients
+        ];
+
+        return response()->json($data, 200);
     }
 
     //
     public function recovered()
     {
+        // menggunakan model student untuk select data
+        $patients = Patient::where('status', 'recovered')->get();
+
+        // handling jika data kosong
+        if ($patients->isEmpty()) {
+            $data = [
+                "message" => "Data is empty",
+                "data" => []
+            ];
+
+            return response()->json($data, 200);
+        }
+
+        // handling jika database tidak ada
+        else {
+            $data = [
+                "message" => "Data not found",
+                "data" => []
+            ];
+
+            return response()->json($data, 404);
+        }
+
+        // Menghitung total data pasien recovered
+        $totalRecoveredPatients = $patients->count();
+
+        $data = [
+            'message' => 'Get all recovered patients',
+            'total' => $totalRecoveredPatients,
+            'data' => $patients
+        ];
+
+        return response()->json($data, 200);
     }
 
     //
     public function dead()
     {
+        // menggunakan model student untuk select data
+        $patients = Patient::where('status', 'dead')->get();
+
+        // handling jika data kosong
+        if ($patients->isEmpty()) {
+            $data = [
+                "message" => "Data is empty",
+                "data" => []
+            ];
+
+            return response()->json($data, 200);
+        }
+
+        // handling jika database tidak ada
+        else {
+            $data = [
+                "message" => "Data not found",
+                "data" => []
+            ];
+
+            return response()->json($data, 404);
+        }
+
+        // Menghitung total data pasien dead
+        $totalDeadPatients = $patients->count();
+
+        $data = [
+            'message' => 'Get all resource',
+            'total' => $totalDeadPatients,
+            'data' => $patients
+        ];
+
+        return response()->json($data, 200);
     }
 }

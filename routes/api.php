@@ -38,16 +38,16 @@ Route::delete('/patients/{id}', [PatientController::class, 'destroy']);
 // ---------- //
 
 // method get
-Route::get('/patients/search/{name}', [PatientController::class, 'index']);
+Route::get('/patients/search/{name}', [PatientController::class, 'search']);
 
 // method get
-Route::get('/patients/status/positive', [PatientController::class, 'index']);
+Route::get('/patients/status/positive', [PatientController::class, 'positive']);
 
 // method get
-Route::get('/patients/status/recovered', [PatientController::class, 'index']);
+Route::get('/patients/status/recovered', [PatientController::class, 'recovered']);
 
 // method get
-Route::get('/patients/status/dead', [PatientController::class, 'index']);
+Route::get('/patients/status/dead', [PatientController::class, 'dead']);
 
 
 // this one is for login register and grouping (nanti kalo udh autentikasi)
